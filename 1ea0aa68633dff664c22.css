@@ -1,0 +1,204 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+    font-family: "Segoe UI", sans-serif;
+    background-color: #f3f2f1; /* Light grey background */
+}
+
+#app-body {
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.header {
+    background-color: #4b4949; 
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    border-bottom: 2px solid #4b4949;
+}
+
+h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.content { /* Renamed to .content-section in HTML for clarity, ensure consistency if you update HTML */
+    flex-grow: 1;
+    padding: 20px 0;
+}
+
+/* Buttons */
+.ms-Button { /* Renamed to .action-button in HTML for clarity, ensure consistency if you update HTML */
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    transition: background-color 0.167s ease-in-out, border-color 0.167s ease-in-out;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.ms-Button--primary { /* Renamed to .primary-button in HTML for clarity, ensure consistency if you update HTML */
+    background-color: #4b4949;
+    color: white;
+}
+
+.ms-Button--primary:hover {
+    background-color: #4b4949; /* Consider a slightly darker shade like #3a3838 for hover */
+}
+
+.ms-Button:not(.ms-Button--primary) { /* Renamed to .secondary-button in HTML for clarity, ensure consistency if you update HTML */
+    background-color: #e6e6e6;
+    color: #333;
+    border-color: #ccc;
+}
+
+.ms-Button:not(.ms-Button--primary):hover {
+    background-color: #dcdcdc;
+    border-color: #b0b0b0;
+}
+
+
+/* Styling for the HTML preview div */
+#llm-response-html-preview {
+    width: 100%;
+    min-height: 150px; /* Gives it a minimum height */
+    max-height: 300px; /* Optional: Sets a max height so it doesn't take up too much space before scrolling */
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 14px;
+    background-color: #ffffff; /* White background for the content area */
+    overflow-y: auto; /* THIS IS THE KEY: Enables vertical scroll if content exceeds height */
+    /* You might want to add some default text styling if the LLM doesn't include it */
+    color: #333;
+    line-height: 1.5;
+}
+
+#llm-response-area {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+#status-message {
+    color: #666;
+    font-size: 13px;
+}
+
+/* Input Group for Select Box and Text Input */
+.input-group {
+    margin-bottom: 20px; /* Space below the group */
+    display: flex;
+    flex-direction: column;
+}
+
+.input-label {
+    font-size: 14px;
+    color: #555; /* A slightly softer black for labels */
+    margin-bottom: 8px; /* Space between label and select box */
+    font-weight: 500;
+}
+
+.select-box,
+.text-input { /* Apply common styles to both select and text input */
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc; /* Standard border color */
+    border-radius: 4px; /* Matches your existing button border-radius */
+    background-color: #fff; /* White background for the dropdown */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08); /* Subtle inner shadow */
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.select-box {
+    appearance: none; /* Remove default system arrow */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    /* Custom SVG arrow, color adjusted to a dark grey */
+    /*background-image: url('data:image/svg+xml;utf8,<svg fill="%234b4949" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');*/
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+    cursor: pointer;
+}
+
+.select-box:focus,
+.text-input:focus { /* Apply focus styles to both */
+    outline: none;
+    border-color: #4b4949; /* Focus border color matches your primary button */
+    box-shadow: 0 0 0 3px rgba(75, 73, 73, 0.2); /* Soft shadow on focus, using primary color */
+}
+
+/* Collapsible Section Styles */
+.collapsible-container {
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden; /* Crucial for max-height animation */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.collapsible-header {
+    width: 100%;
+    background-color: #f8f8f8; /* Lighter background for header */
+    padding: 12px 20px;
+    border: none;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 600;
+    color: #4b4949;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.collapsible-header:hover {
+    background-color: #eef;
+}
+
+.arrow-icon {
+    transition: transform 0.3s ease-in-out;
+}
+
+.arrow-icon.expanded {
+    transform: rotate(180deg); /* Rotates arrow up when expanded */
+}
+
+.collapsible-content {
+    max-height: 0; /* Collapsed by default */
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+    padding: 0 20px; /* No padding when collapsed */
+    background-color: #fff;
+    display: flex; /* Ensure content itself is a flex container */
+    flex-direction: column; /* Stack items vertically */
+}
+
+.collapsible-content.expanded {
+    max-height: 500px; /* Large enough to contain content, adjust if needed */
+    padding: 20px; /* Padding when expanded */
+}
+
+/* Adjustments for buttons within collapsible content if needed */
+.collapsible-content .ms-Button--primary.full-width-button {
+    margin-bottom: 0; /* Remove default margin-bottom from the button */
+    margin-top: 15px; /* Add some space above the button within the collapsible content */
+}
